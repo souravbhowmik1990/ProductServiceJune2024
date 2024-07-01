@@ -25,8 +25,8 @@ public class ProductController {
     }
 
     //  http://localhsot:8080/products/1
-    @GetMapping("/id")
-    public Product getProductById(@PathVariable("{id}") Long id){
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable("id") Long id){
         return productService.getSingleProduct(id);
 
     }
