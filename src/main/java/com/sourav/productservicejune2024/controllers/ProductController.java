@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sourav.productservicejune2024.Models.Product;
 import com.sourav.productservicejune2024.Services.FakeStoreProductService;
 import com.sourav.productservicejune2024.Services.ProductService;
+import com.sourav.productservicejune2024.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,7 +27,7 @@ public class ProductController {
 
     //  http://localhsot:8080/products/1
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
 
 ////        throw new RuntimeException("Something went wrong");
 //        ResponseEntity<Product> responseEntity = null;
