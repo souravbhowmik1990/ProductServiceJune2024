@@ -4,6 +4,7 @@ import com.sourav.productservicejune2024.DTOS.FakeStoreProductDto;
 import com.sourav.productservicejune2024.Models.Category;
 import com.sourav.productservicejune2024.Models.Product;
 import com.sourav.productservicejune2024.exception.ProductNotFoundException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Service("FakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
     private RestTemplate restTemplate;
 
@@ -75,6 +76,11 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public void deleteProduct(Long id) {
 
+    }
+
+    @Override
+    public Product addNewProduct(Product product) {
+        return null;
     }
 
     private Product convertFakeStoreProductDtoToProduct(FakeStoreProductDto fakeStoreProductDto) {

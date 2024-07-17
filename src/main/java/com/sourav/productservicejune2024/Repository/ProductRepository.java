@@ -1,4 +1,39 @@
 package com.sourav.productservicejune2024.Repository;
 
-public interface ProductRepository {
+import com.sourav.productservicejune2024.Models.Category;
+import com.sourav.productservicejune2024.Models.Product;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    //Product repository should contain all the methods (CRUD) related to product model
+
+    Product findByTitle(String title);
+
+
+    List<Product> findByPriceGreaterThan(Double price);
+
+    List<Product> findByPriceLessThan(Double price);
+
+    List<Product> findProductByTitleLike(String word); //case sensitive
+
+    List<Product> findProductByTitleLikeIgnoreCase(String word); //case insensitive
+
+    List<Product> findTopByTitleContainingAndPriceLessThanEqualOrderById(String title, Double price);
+
+    List<Product> findProductByTitleContainsAndPriceLessThan(String word, Double price);
+
+    Optional<Product> findById(Long id);
+
+    List<Product> findAll(Sort sort);
 }
+
+/*
+1. repository should be an Interface.
+2. repository should extend JPARepository.
+ */

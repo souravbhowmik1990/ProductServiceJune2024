@@ -7,6 +7,7 @@ import com.sourav.productservicejune2024.Services.FakeStoreProductService;
 import com.sourav.productservicejune2024.Services.ProductService;
 import com.sourav.productservicejune2024.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,8 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("SelfProductService")
+                             ProductService productService) {
         this.productService = productService;
     }
 
@@ -49,9 +51,9 @@ public class ProductController {
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
     }
-
-    public void   deleteProduct(){
-
+    @DeleteMapping("/{id}")
+    public void   deleteProduct(@PathVariable("id") Long productId){
+        productService.deleteProduct(productId);
     }
 
     //PATCH == http://localhost:8080/Product/1
@@ -62,6 +64,10 @@ public class ProductController {
     @PutMapping("/{id}")
     public Product replaceProduct(@PathVariable("id") Long id, Product product){
         return null;
+    }
+    @PostMapping
+    public Product addNewProduct(@RequestBody Product product){
+        return productService.addNewProduct(product);
     }
 
 //    @ExceptionHandler(ArithmeticException.class)
