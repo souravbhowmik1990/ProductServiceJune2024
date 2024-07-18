@@ -2,8 +2,10 @@ package com.sourav.productservicejune2024.Repository;
 
 import com.sourav.productservicejune2024.Models.Category;
 import com.sourav.productservicejune2024.Models.Product;
+import com.sourav.productservicejune2024.projection.ProductWithSomeData;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,6 +33,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findById(Long id);
 
     List<Product> findAll(Sort sort);
+
+
+    // HQL -Hybernate
+    @Query("select p.id, p.title, p.price from Product p")
+    List<ProductWithSomeData> randomSearchMethod();
+
+
+
 }
 
 /*
