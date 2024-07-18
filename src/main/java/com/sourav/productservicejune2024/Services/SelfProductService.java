@@ -1,6 +1,8 @@
 package com.sourav.productservicejune2024.Services;
 
+import com.sourav.productservicejune2024.Models.Category;
 import com.sourav.productservicejune2024.Models.Product;
+import com.sourav.productservicejune2024.Repository.CategoryRepository;
 import com.sourav.productservicejune2024.Repository.ProductRepository;
 import com.sourav.productservicejune2024.exception.ProductNotFoundException;
 import jakarta.persistence.Id;
@@ -13,9 +15,12 @@ import java.util.Optional;
 @Service("SelfProductService")
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
-    public SelfProductService(ProductRepository productRepository) {
+    public SelfProductService(ProductRepository productRepository,
+                                CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -54,6 +59,14 @@ public class SelfProductService implements ProductService {
 
     @Override
     public Product addNewProduct(Product product) {
+        Category category = product.getCategory();
+
+        if(category.getId() == null){
+            //we need to create a new category object in database first
+            category = categoryRepository.save(category);
+            product.setCategory(category);
+
+        }
         return productRepository.save(product);
 
     }
