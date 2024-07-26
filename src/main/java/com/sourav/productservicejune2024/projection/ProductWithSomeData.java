@@ -6,5 +6,4 @@ public interface ProductWithSomeData {
 
     String getTitle();
 
-    Double getPrice();
 }
