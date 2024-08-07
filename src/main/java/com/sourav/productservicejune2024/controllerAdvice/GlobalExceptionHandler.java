@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionDto> handleArithmeticException() {
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("ArithmeticException has happened");
-        exceptionDto.setSolution("I Don't know, please again");
+        exceptionDto.setSolution("I Don't know, please try again");
 
         ResponseEntity<ExceptionDto> response = new ResponseEntity<>(
                 exceptionDto,

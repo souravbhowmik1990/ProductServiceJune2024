@@ -3,6 +3,8 @@ package com.sourav.productservicejune2024.Repository;
 import com.sourav.productservicejune2024.Models.Category;
 import com.sourav.productservicejune2024.Models.Product;
 import com.sourav.productservicejune2024.projection.ProductWithSomeData;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,7 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findById(Long id);
 
-    List<Product> findAll(Sort sort);
+    Page<Product> findAll(Pageable pageable);
 
 
     // HQL -Hybernate

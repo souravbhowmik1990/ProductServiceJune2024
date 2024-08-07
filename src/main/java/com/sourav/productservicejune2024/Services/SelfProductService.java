@@ -7,6 +7,9 @@ import com.sourav.productservicejune2024.Repository.ProductRepository;
 import com.sourav.productservicejune2024.exception.ProductNotFoundException;
 import jakarta.persistence.Id;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +40,11 @@ public class SelfProductService implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(int pageNumber, int pageSize) {
+        return productRepository.findAll(
+                PageRequest.of(pageNumber, pageSize,
+                        Sort.by("price").ascending().and(Sort.by("title").ascending()))
+        );
     }
     //Patch API
     @Override
